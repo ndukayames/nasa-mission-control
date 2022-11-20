@@ -33,9 +33,11 @@ async function loadPlanets() {
       .on("end", () => {
         console.log("Done finding habitable planets, see count below");
         console.log(habitablePlanets.length);
+        resolve();
       })
       .on("error", (error) => {
         console.log(error);
+        reject(error);
       });
   });
 }

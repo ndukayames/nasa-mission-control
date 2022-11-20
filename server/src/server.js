@@ -10,6 +10,7 @@ async function startServer() {
   await loadPlanets();
 
   const server = http.createServer(app);
+
   server.listen(PORT, () => {
     console.log(`Server started, located at ${PORT}`);
   });
