@@ -14,14 +14,11 @@ const launch = {
 
 launches.set(launch.flightNumber, launch);
 
-console.log(launches);
-
 function getAllLaunches() {
   return Array.from(launches.values());
 }
 
 function addNewLaunch(launch) {
-  console.log("", launch);
   // validate input
   if (
     !launch.mission ||
@@ -29,7 +26,7 @@ function addNewLaunch(launch) {
     !launch.launchDate ||
     !launch.target
   ) {
-    return { success: true, err: "Missing required launch property" };
+    return { success: false, err: "Missing required launch property" };
   }
   launch.flightNumber = ++latestFlightNumber;
   launch.customers = ["Nduka", "NASA"];
@@ -38,7 +35,7 @@ function addNewLaunch(launch) {
   launch.launchDate = new Date(launch.launchDate);
   // check if launch date is valid
   if (isNaN(launch.launchDate)) {
-    return { success: true, err: "Invalid Launch Date" };
+    return { success: false, err: "Invalid Launch Date" };
   }
 
   launches.set(launch.flightNumber, launch);
@@ -48,7 +45,6 @@ function addNewLaunch(launch) {
 function deleteLaunch(id) {
   const launchId = Number(id);
   const launch = launches.has(launchId);
-  console.log("", launch, id);
   if (launch) {
     const toAbort = launches.get(launchId);
     toAbort.success = false;
